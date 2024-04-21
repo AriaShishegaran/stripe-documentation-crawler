@@ -1,1 +1,0 @@
-htmlStripe JS Reference[js](/js)api docs
