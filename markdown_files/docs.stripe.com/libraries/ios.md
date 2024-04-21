@@ -1,0 +1,21 @@
+htmlStripe iOS SDK | Stripe Documentation[Skip to content](#main-content)iOS SDK[Sign in](https://dashboard.stripe.com/login?redirect=https%3A%2F%2Fdocs.stripe.com%2Flibraries%2Fios)[The Stripe Docs logo](/)[Search the docs/](#)[Create account](https://dashboard.stripe.com/register)[Sign in](https://dashboard.stripe.com/login?redirect=https%3A%2F%2Fdocs.stripe.com%2Flibraries%2Fios)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[Banking as a service](/financial-services)[Developer tools](/development)[No-code](/no-code)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[](#)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[Banking as a service](/financial-services)[Developer tools](/development)[](#)APIs & SDKsHelp[Overview](/docs/development)[Building your integration](#)Developer tools[SDKs](#)
+[API](#)[Testing](#)[Webhooks](#)[Stripe CLI](#)[Stripe Shell](#)[Developer Dashboard](#)[Workbench](#)[Stripe for Visual Studio Code](/docs/stripe-vscode)[File uploads](/docs/file-upload)[Feedback](/docs/dev-tools-csat)Resources[Security](#)[Sample projects](#)[Videos](#)Extend Stripe[Stripe Apps](#)[Stripe Connectors](#)Partners[Partner ecosystem](/docs/partners)[Partner certification](/docs/partners/training-and-certification)NetherlandsEnglish (United States)[](#)[](#)[Home](/docs)[Developer tools](/docs/development)[SDKs](/docs/libraries)# Stripe iOS SDK
+
+Build payments into your iOS mobile app.The Stripe iOS SDK helps you build customizable payments into your iOS app. We provide powerful and customizable UI screens and elements that you can use out-of-the-box to collect your users’ payment details. We also expose the low-level APIs that enable those UIs so that you can build fully custom payments.
+
+![Examples of apps using the Address Element, Mobile Payment Element, and Card Element in an iOS app.](https://b.stripecdn.com/docs-statics-srv/assets/ios-landing.35eb3fe43605b2b982353f4bdac95840.png)
+
+[Mobile Payment ElementRecommendedIntegrate the Stripe prebuilt PaymentSheet UI into the checkout of your iOS app.](/payments/accept-a-payment?platform=ios&ui=payment-sheet)[Custom Payment ElementBuild a custom payment UI using PaymentSheet FlowController.](/payments/accept-a-payment?platform=ios&ui=payment-sheet#ios-flowcontroller)[Card ElementLegacyUse the basic card field in your own payment UI.](/payments/card-element?platform=ios)[Address ElementAutofill the billing and shipping addresses of your customers quickly and accurately.](/elements/address-element?platform=ios)[Appearance APICustomize the look and feel of PaymentSheet to match the design of your app.](/elements/appearance-api?platform=ios)[Customer SheetPresent a prebuilt UI for managing a customer’s saved payment methods.](/elements/customer-sheet?platform=ios)[Apple PayAdd a separate Apple Pay button to the checkout of your app.](/apple-pay?platform=ios)## See also
+
+- [Stripe iOS SDK on GitHub](https://github.com/stripe/stripe-ios)
+
+Was this page helpful?[Yes](#)[No](#)Need help?[Contact Support](https://support.stripe.com/).Check out our[product changelog](https://stripe.com/blog/changelog).Questions?[Contact Sales](https://stripe.com/contact/sales).Powered by[Markdoc](https://markdoc.dev)Sign up for developer updates:Sign upYou can unsubscribe at any time. Read our[privacy policy](https://stripe.com/privacy).Stripe ShellTest modeAPI Explorer[](https://stripe.com/docs/stripe-cli#install)`Welcome to the Stripe Shell!
+
+Stripe Shell is a browser-based shell with the Stripe CLI pre-installed. Log in to your
+Stripe account and press Control + Backtick (`) on your keyboard to start managing your Stripe
+resources in test mode.
+
+- View supported Stripe commands: stripe help ▶️
+- Find webhook events: stripe trigger ▶️ [event]
+- Listen for webhook events: stripe listen ▶
+- Call Stripe APIs: stripe [api resource] [operation] (e.g., stripe customers list ▶️)`The Stripe Shell is best experienced on desktop.`$`

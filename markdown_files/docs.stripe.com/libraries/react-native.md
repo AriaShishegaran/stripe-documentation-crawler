@@ -1,0 +1,21 @@
+htmlStripe React Native SDK | Stripe Documentation[Skip to content](#main-content)React Native SDK[Sign in](https://dashboard.stripe.com/login?redirect=https%3A%2F%2Fdocs.stripe.com%2Flibraries%2Freact-native)[The Stripe Docs logo](/)[Search the docs/](#)[Create account](https://dashboard.stripe.com/register)[Sign in](https://dashboard.stripe.com/login?redirect=https%3A%2F%2Fdocs.stripe.com%2Flibraries%2Freact-native)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[Banking as a service](/financial-services)[Developer tools](/development)[No-code](/no-code)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[](#)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[Banking as a service](/financial-services)[Developer tools](/development)[](#)APIs & SDKsHelp[Overview](/docs/development)[Building your integration](#)Developer tools[SDKs](#)
+[API](#)[Testing](#)[Webhooks](#)[Stripe CLI](#)[Stripe Shell](#)[Developer Dashboard](#)[Workbench](#)[Stripe for Visual Studio Code](/docs/stripe-vscode)[File uploads](/docs/file-upload)[Feedback](/docs/dev-tools-csat)Resources[Security](#)[Sample projects](#)[Videos](#)Extend Stripe[Stripe Apps](#)[Stripe Connectors](#)Partners[Partner ecosystem](/docs/partners)[Partner certification](/docs/partners/training-and-certification)NetherlandsEnglish (United States)[](#)[](#)[Home](/docs)[Developer tools](/docs/development)[SDKs](/docs/libraries)# Stripe React Native SDK
+
+Build payments into your React Native mobile app.The Stripe React Native SDK allows you to build payments into your native Android and iOS apps using React Native. We provide powerful and customizable UI screens and elements that you can use out-of-the-box to collect your users’ payment details.
+
+![Examples of apps using the Address Element, Mobile Payment Element, and Card Element in a React Native app.](https://b.stripecdn.com/docs-statics-srv/assets/react-native-landing.ec78345ff29f805d6b789684e2f1a226.png)
+
+[Mobile Payment ElementRecommendedIntegrate the Stripe prebuilt PaymentSheet UI into the checkout of your React Native app.](/payments/accept-a-payment?platform=react-native&ui=payment-sheet)[Custom Payment ElementComplete the payment in your own UI using PaymentSheet.](/payments/accept-a-payment?platform=react-native&ui=payment-sheet#react-native-flowcontroller)[Card ElementLegacyUse the basic card field in your own payment UI.](/payments/card-element?platform=react-native)[Address ElementAutofill the billing and shipping addresses of your customers quickly and accurately.](/elements/address-element?platform=react-native)[Appearance APICustomize the look and feel of PaymentSheet to match the design of your app.](/elements/appearance-api?platform=react-native)[Customer SheetBetaPresent a prebuilt UI for managing a customer’s saved payment methods.](/elements/customer-sheet?platform=react-native)[Apple PayAdd a separate Apple Pay button to the checkout of your app.](/apple-pay?platform=react-native)[Google PayAdd a separate Google Pay button to the checkout of your app.](/google-pay?platform=react-native)## See also
+
+- [Stripe React Native SDK on GitHub](https://github.com/stripe/stripe-react-native)
+
+Was this page helpful?[Yes](#)[No](#)Need help?[Contact Support](https://support.stripe.com/).Check out our[product changelog](https://stripe.com/blog/changelog).Questions?[Contact Sales](https://stripe.com/contact/sales).Powered by[Markdoc](https://markdoc.dev)Sign up for developer updates:Sign upYou can unsubscribe at any time. Read our[privacy policy](https://stripe.com/privacy).Stripe ShellTest modeAPI Explorer[](https://stripe.com/docs/stripe-cli#install)`Welcome to the Stripe Shell!
+
+Stripe Shell is a browser-based shell with the Stripe CLI pre-installed. Log in to your
+Stripe account and press Control + Backtick (`) on your keyboard to start managing your Stripe
+resources in test mode.
+
+- View supported Stripe commands: stripe help ▶️
+- Find webhook events: stripe trigger ▶️ [event]
+- Listen for webhook events: stripe listen ▶
+- Call Stripe APIs: stripe [api resource] [operation] (e.g., stripe customers list ▶️)`The Stripe Shell is best experienced on desktop.`$`

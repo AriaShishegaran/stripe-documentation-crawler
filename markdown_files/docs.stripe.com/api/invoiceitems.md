@@ -1,0 +1,165 @@
+htmlInvoice Items | Stripe API Reference[](/api)Find anything/
+[Core Resources](#)
+[Payment Methods](#)[Products](#)[Checkout](#)[Payment Links](#)[Billing](#)[Connect](#)[Fraud](#)[Issuing](#)[Terminal](#)[Treasury](#)[Entitlements](#)[Sigma](#)[Reporting](#)[Financial Connections](#)[Tax](#)[Identity](#)[Crypto](#)[Climate](#)[Forwarding](#)[Webhooks](#)[Sign in →](https://dashboard.stripe.com/login)# Invoice Items
+
+Invoice Items represent the component lines of an invoice. An invoice item is added to an invoice by creating or updating it with an invoice field, at which point it will be included as an invoice line item within invoice.lines.
+
+Invoice Items can be created before you are ready to actually send the invoice. This can be particularly useful when combined with a subscription. Sometimes you want to add a charge or credit to a customer, but actually charge or credit the customer’s card only at the end of a regular billing cycle. This is useful for combining several charges (to minimize per-transaction fees), or for having Stripe tabulate your usage-based billing totals.
+
+Related guides: Integrate with the Invoicing API, Subscription Invoices.
+
+Endpoints
+# The Invoice Item object
+
+### Attributes
+
+- idstringUnique identifier for the object.
+
+
+- amountintegerAmount (in the currency specified) of the invoice item. This should always be equal to unit_amount * quantity.
+
+
+- currencyenumThree-letter ISO currency code, in lowercase. Must be a supported currency.
+
+
+- customerstringExpandableThe ID of the customer who will be billed when this invoice item is billed.
+
+
+- descriptionnullablestringAn arbitrary string attached to the object. Often useful for displaying to users.
+
+
+- metadatanullableobjectSet of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+
+
+- periodobjectThe period associated with this invoice item. When set to different values, the period will be rendered on the invoice. If you have Stripe Revenue Recognition enabled, the period will be used to recognize and defer revenue. See the Revenue Recognition documentation for details.
+
+Show child attributes
+- pricenullableobjectThe price of the invoice item.
+
+Show child attributes
+- prorationbooleanWhether the invoice item was created automatically as a proration adjustment when the customer switched plans.
+
+
+
+### More attributesExpand all
+
+- objectstring
+- datetimestamp
+- discountableboolean
+- discountsnullablearray of stringsExpandable
+- invoicenullablestringExpandable
+- livemodeboolean
+- quantityinteger
+- subscriptionnullablestringExpandable
+- subscription_itemnullablestring
+- tax_ratesnullablearray of objects
+- test_clocknullablestringExpandable
+- unit_amountnullableinteger
+- unit_amount_decimalnullabledecimal string
+
+The Invoice Item object`{  "id": "ii_1MtGUtLkdIwHu7ixBYwjAM00",  "object": "invoiceitem",  "amount": 1099,  "currency": "usd",  "customer": "cus_NeZei8imSbMVvi",  "date": 1680640231,  "description": "T-shirt",  "discountable": true,  "discounts": [],  "invoice": null,  "livemode": false,  "metadata": {},  "period": {    "end": 1680640231,    "start": 1680640231  },  "plan": null,  "price": {    "id": "price_1MtGUsLkdIwHu7ix1be5Ljaj",    "object": "price",    "active": true,    "billing_scheme": "per_unit",    "created": 1680640229,    "currency": "usd",    "custom_unit_amount": null,    "livemode": false,    "lookup_key": null,    "metadata": {},    "nickname": null,    "product": "prod_NeZe7xbBdJT8EN",    "recurring": null,    "tax_behavior": "unspecified",    "tiers_mode": null,    "transform_quantity": null,    "type": "one_time",    "unit_amount": 1099,    "unit_amount_decimal": "1099"  },  "proration": false,  "quantity": 1,  "subscription": null,  "tax_rates": [],  "test_clock": null,  "unit_amount": 1099,  "unit_amount_decimal": "1099"}`# Create an invoice item
+
+Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.
+
+### Parameters
+
+- customerstringRequiredThe ID of the customer who will be billed when this invoice item is billed.
+
+
+- amountintegerThe integer amount in cents of the charge to be applied to the upcoming invoice. Passing in a negative amount will reduce the amount_due on the invoice.
+
+
+- currencyenumThree-letter ISO currency code, in lowercase. Must be a supported currency.
+
+
+- descriptionstringAn arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
+
+
+- metadataobjectSet of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to metadata.
+
+
+- periodobjectThe period associated with this invoice item. When set to different values, the period will be rendered on the invoice. If you have Stripe Revenue Recognition enabled, the period will be used to recognize and defer revenue. See the Revenue Recognition documentation for details.
+
+Show child parameters
+- pricestringThe ID of the price object.
+
+
+
+### More parametersExpand all
+
+- discountableboolean
+- discountsarray of objects
+- invoicestring
+- price_dataobject
+- quantityinteger
+- subscriptionstring
+- tax_behaviorenum
+- tax_codestring
+- tax_ratesarray of strings
+- unit_amountinteger
+- unit_amount_decimalstring
+
+### Returns
+
+The created invoice item object is returned if successful. Otherwise, this call raises an error.
+
+POST/v1/invoiceitemsServer-side languageStripe CLIcURL.NETGoJavaNode.jsPHPPythonRuby[](#)[](#)`curl https://api.stripe.com/v1/invoiceitems \  -u "sk_test_Gx4mWEg...4DYMUIqfIrszsk_test_Gx4mWEgHtCMr4DYMUIqfIrsz:" \  -d customer=cus_NeZei8imSbMVvi \  -d price=price_1MtGUsLkdIwHu7ix1be5Ljaj`Response`{  "id": "ii_1MtGUtLkdIwHu7ixBYwjAM00",  "object": "invoiceitem",  "amount": 1099,  "currency": "usd",  "customer": "cus_NeZei8imSbMVvi",  "date": 1680640231,  "description": "T-shirt",  "discountable": true,  "discounts": [],  "invoice": null,  "livemode": false,  "metadata": {},  "period": {    "end": 1680640231,    "start": 1680640231  },  "plan": null,  "price": {    "id": "price_1MtGUsLkdIwHu7ix1be5Ljaj",    "object": "price",    "active": true,    "billing_scheme": "per_unit",    "created": 1680640229,    "currency": "usd",    "custom_unit_amount": null,    "livemode": false,    "lookup_key": null,    "metadata": {},    "nickname": null,    "product": "prod_NeZe7xbBdJT8EN",    "recurring": null,    "tax_behavior": "unspecified",    "tiers_mode": null,    "transform_quantity": null,    "type": "one_time",    "unit_amount": 1099,    "unit_amount_decimal": "1099"  },  "proration": false,  "quantity": 1,  "subscription": null,  "tax_rates": [],  "test_clock": null,  "unit_amount": 1099,  "unit_amount_decimal": "1099"}`# Update an invoice item
+
+Updates the amount or description of an invoice item on an upcoming invoice. Updating an invoice item is only possible before the invoice it’s attached to is closed.
+
+### Parameters
+
+- amountintegerThe integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer’s account, pass a negative amount.
+
+
+- descriptionstringAn arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
+
+
+- metadataobjectSet of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to metadata.
+
+
+- periodobjectThe period associated with this invoice item. When set to different values, the period will be rendered on the invoice. If you have Stripe Revenue Recognition enabled, the period will be used to recognize and defer revenue. See the Revenue Recognition documentation for details.
+
+Show child parameters
+- pricestringThe ID of the price object.
+
+
+
+### More parametersExpand all
+
+- discountableboolean
+- discountsarray of objects
+- price_dataobject
+- quantityinteger
+- tax_behaviorenum
+- tax_codestring
+- tax_ratesarray of strings
+- unit_amountinteger
+- unit_amount_decimalstring
+
+### Returns
+
+The updated invoice item object is returned upon success. Otherwise, this call raises an error.
+
+POST/v1/invoiceitems/:idServer-side languageStripe CLIcURL.NETGoJavaNode.jsPHPPythonRuby[](#)[](#)`curl https://api.stripe.com/v1/invoiceitems/ii_1MtGUtLkdIwHu7ixBYwjAM00 \  -u "sk_test_Gx4mWEg...4DYMUIqfIrszsk_test_Gx4mWEgHtCMr4DYMUIqfIrsz:" \  -d "metadata[order_id]"=6735`Response`{  "id": "ii_1MtGUtLkdIwHu7ixBYwjAM00",  "object": "invoiceitem",  "amount": 1099,  "currency": "usd",  "customer": "cus_NeZei8imSbMVvi",  "date": 1680640231,  "description": "T-shirt",  "discountable": true,  "discounts": [],  "invoice": null,  "livemode": false,  "metadata": {    "order_id": "6735"  },  "period": {    "end": 1680640231,    "start": 1680640231  },  "plan": null,  "price": {    "id": "price_1MtGUsLkdIwHu7ix1be5Ljaj",    "object": "price",    "active": true,    "billing_scheme": "per_unit",    "created": 1680640229,    "currency": "usd",    "custom_unit_amount": null,    "livemode": false,    "lookup_key": null,    "metadata": {},    "nickname": null,    "product": "prod_NeZe7xbBdJT8EN",    "recurring": null,    "tax_behavior": "unspecified",    "tiers_mode": null,    "transform_quantity": null,    "type": "one_time",    "unit_amount": 1099,    "unit_amount_decimal": "1099"  },  "proration": false,  "quantity": 1,  "subscription": null,  "tax_rates": [],  "test_clock": null,  "unit_amount": 1099,  "unit_amount_decimal": "1099"}`# Retrieve an invoice item
+
+Retrieves the invoice item with the given ID.
+
+### Parameters
+
+No parameters.
+
+### Returns
+
+Returns an invoice item if a valid invoice item ID was provided. Raises an error otherwise.
+
+GET/v1/invoiceitems/:idServer-side languageStripe CLIcURL.NETGoJavaNode.jsPHPPythonRuby[](#)[](#)`curl https://api.stripe.com/v1/invoiceitems/ii_1MtGUtLkdIwHu7ixBYwjAM00 \  -u "sk_test_Gx4mWEg...4DYMUIqfIrszsk_test_Gx4mWEgHtCMr4DYMUIqfIrsz:"`Response`{  "id": "ii_1MtGUtLkdIwHu7ixBYwjAM00",  "object": "invoiceitem",  "amount": 1099,  "currency": "usd",  "customer": "cus_NeZei8imSbMVvi",  "date": 1680640231,  "description": "T-shirt",  "discountable": true,  "discounts": [],  "invoice": null,  "livemode": false,  "metadata": {},  "period": {    "end": 1680640231,    "start": 1680640231  },  "plan": null,  "price": {    "id": "price_1MtGUsLkdIwHu7ix1be5Ljaj",    "object": "price",    "active": true,    "billing_scheme": "per_unit",    "created": 1680640229,    "currency": "usd",    "custom_unit_amount": null,    "livemode": false,    "lookup_key": null,    "metadata": {},    "nickname": null,    "product": "prod_NeZe7xbBdJT8EN",    "recurring": null,    "tax_behavior": "unspecified",    "tiers_mode": null,    "transform_quantity": null,    "type": "one_time",    "unit_amount": 1099,    "unit_amount_decimal": "1099"  },  "proration": false,  "quantity": 1,  "subscription": null,  "tax_rates": [],  "test_clock": null,  "unit_amount": 1099,  "unit_amount_decimal": "1099"}`Stripe ShellTest modeAPI Explorer[](https://stripe.com/docs/stripe-cli#install)`Welcome to the Stripe Shell!
+
+Stripe Shell is a browser-based shell with the Stripe CLI pre-installed. Log in to your
+Stripe account and press Control + Backtick (`) on your keyboard to start managing your Stripe
+resources in test mode.
+
+- View supported Stripe commands: stripe help ▶️
+- Find webhook events: stripe trigger ▶️ [event]
+- Listen for webhook events: stripe listen ▶
+- Call Stripe APIs: stripe [api resource] [operation] (e.g., stripe customers list ▶️)`The Stripe Shell is best experienced on desktop.`$`

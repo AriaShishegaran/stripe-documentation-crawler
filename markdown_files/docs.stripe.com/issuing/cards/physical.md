@@ -1,0 +1,19 @@
+htmlPhysical cards | Stripe Documentation[Skip to content](#main-content)Physical cards[Sign in](https://dashboard.stripe.com/login?redirect=https%3A%2F%2Fdocs.stripe.com%2Fissuing%2Fcards%2Fphysical)[The Stripe Docs logo](/)[Search the docs/](#)[Create account](https://dashboard.stripe.com/register/issuing)[Sign in](https://dashboard.stripe.com/login?redirect=https%3A%2F%2Fdocs.stripe.com%2Fissuing%2Fcards%2Fphysical)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[Banking as a service](/financial-services)[Developer tools](/development)[No-code](/no-code)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[](#)[Get started](/get-started)[Payments](/payments)[Finance automation](/finance-automation)[Banking as a service](/financial-services)[Developer tools](/development)[](#)APIs & SDKsHelp[Overview](/docs/financial-services)[Start an integration](#)Products[Issuing cards](#)
+[Treasury](#)[Business financing](#)NetherlandsEnglish (United States)[](#)[](#)[Issuing](/issuing)·[Home](/docs)[Banking as a service](/docs/financial-services)[Issuing cards](/docs/issuing)# Physical cards
+
+Understand the difference between standard and customized physical cards.Stripe offers two types of physical cards. This document provides an overview of the card types and the different options you have for creating them.
+
+Card typeDescriptionTimelineRecommended use casesStandard cardsSelect a card with a black or white background and add your business logo on the front to customize it.[Learn how to create standard cards](/issuing/cards/physical/standard).Available immediately for all users.Ideal if you’re looking to go to market fast, for a pilot launch, or if you’re thinking of issuing a smaller quantity of cards (less than a thousand).Custom cardsFully customize your cards with your artwork and design choices on the front and back. You can also design custom carriers (the paper your card is attached to for shipping).[Learn more about custom cards](/issuing/cards/physical/custom).Custom cards, carriers, and envelopes can be fully customized for your brand. The design process typically takes a few weeks, followed by a manufacturing lead time of several months. Once custom items are manufactured and tested, a custom bundle will be set up by Stripe for you to use these new items.Custom cards are useful if physical cards are a core part of your business and you’re planning on issuing a large amount of cards. Custom cards let you feature your brand goals in your customers’ wallets.## Getting started
+
+If you’re just getting started with Stripe Issuing, we recommend using Standard cards. If your use case requires it, and after you’re comfortable issuing Standard cards, you can get started with Custom cards. See Standard cards and Custom cards to learn more.
+
+Was this page helpful?[Yes](#)[No](#)Need help?[Contact Support](https://support.stripe.com/).Check out our[product changelog](https://stripe.com/blog/changelog).Questions?[Contact Sales](https://stripe.com/contact/sales).Powered by[Markdoc](https://markdoc.dev)Sign up for developer updates:Sign upYou can unsubscribe at any time. Read our[privacy policy](https://stripe.com/privacy).Stripe ShellTest modeAPI Explorer[](https://stripe.com/docs/stripe-cli#install)`Welcome to the Stripe Shell!
+
+Stripe Shell is a browser-based shell with the Stripe CLI pre-installed. Log in to your
+Stripe account and press Control + Backtick (`) on your keyboard to start managing your Stripe
+resources in test mode.
+
+- View supported Stripe commands: stripe help ▶️
+- Find webhook events: stripe trigger ▶️ [event]
+- Listen for webhook events: stripe listen ▶
+- Call Stripe APIs: stripe [api resource] [operation] (e.g., stripe customers list ▶️)`The Stripe Shell is best experienced on desktop.`$`
