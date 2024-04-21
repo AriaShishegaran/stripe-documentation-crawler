@@ -63,16 +63,39 @@ async def fetch_and_check_sitemap(session, sitemap_url, url_data):
 
         return new_data
 
-async def fetch_url_content(session, url):
-    """Fetch content for a given URL using GET request."""
+async def fetch_url_content(session, url, max_retries=3, retry_delay=1):
+    """Fetch content for a given URL using GET request with error handling and retries."""
     logging.info(f"Fetching content from {url}")
-    async with session.get(url) as response:
-        return await response.text()
+    retries = 0
+    while retries < max_retries:
+        try:
+            async with session.get(url) as response:
+                if response.status == 200:
+                    return await response.text()
+                elif response.status == 429:
+                    logging.warning(f"Received status code 429 for {url}. Retrying after a delay...")
+                    await asyncio.sleep(retry_delay)
+                    retries += 1
+                else:
+                    logging.warning(f"Received status code {response.status} for {url}")
+                    return None
+        except aiohttp.ClientError as e:
+            logging.warning(f"Error occurred while fetching {url}: {str(e)}")
+            retries += 1
+            if retries < max_retries:
+                logging.info(f"Retrying in {retry_delay} second(s)...")
+                await asyncio.sleep(retry_delay)
+            else:
+                logging.error(f"Max retries reached for {url}. Skipping.")
+                return None
 
 async def process_url(session, url, info):
     """Process a single URL: fetch, check for changes, save markdown."""
     logging.info(f"Processing URL: {url}")
     content = await fetch_url_content(session, url)
+    if content is None:
+        logging.warning(f"Skipping {url} due to fetch error.")
+        return
     content_hash = hashlib.md5(content.encode()).hexdigest()
 
     if content_hash != info.get('hash'):
@@ -100,7 +123,10 @@ def convert_html_to_markdown(html):
 def html_to_markdown(element, level=0):
     """Recursively convert HTML to Markdown."""
     if isinstance(element, NavigableString):
-        return element.strip()
+        text = element.strip()
+        if not text:
+            return ""
+        return text + "\n\n"
     if isinstance(element, Tag):
         if element.name == 'h1':
             return f"# {element.get_text().strip()}\n\n"
@@ -112,10 +138,10 @@ def html_to_markdown(element, level=0):
             return f"{element.get_text().strip()}\n\n"
         elif element.name == 'ul':
             items = (html_to_markdown(li, level+1) for li in element.find_all('li', recursive=False))
-            return ''.join(f"{'  ' * level}- {item}\n" for item in items if item.strip()) + '\n'
+            return ''.join(f"{'  ' * level}- {item}" for item in items if item.strip()) + '\n'
         elif element.name == 'ol':
             items = (html_to_markdown(li, level+1) for li in element.find_all('li', recursive=False))
-            return ''.join(f"{'  ' * level}{i+1}. {item}\n" for i, item in enumerate(items) if item.strip()) + '\n'
+            return ''.join(f"{'  ' * level}{i+1}. {item}" for i, item in enumerate(items) if item.strip()) + '\n'
         elif element.name == 'a':
             href = element.get('href', '#')
             text = element.get_text().strip()
@@ -126,6 +152,20 @@ def html_to_markdown(element, level=0):
             return f"![{alt}]({src})\n\n"
         elif element.name == 'code' or element.name == 'pre':
             return f"`{element.get_text().strip()}`"
+        elif element.name == 'blockquote':
+            return f"> {element.get_text().strip()}\n\n"
+        elif element.name == 'table':
+            headers = [th.get_text().strip() for th in element.find_all('th')]
+            rows = []
+            for row in element.find_all('tr'):
+                cells = [td.get_text().strip() for td in row.find_all('td')]
+                if cells:
+                    rows.append(cells)
+            table = f"| {' | '.join(headers)} |\n"
+            table += f"| {' | '.join(['---'] * len(headers))} |\n"
+            for row in rows:
+                table += f"| {' | '.join(row)} |\n"
+            return table + '\n'
         else:
             return ''.join(html_to_markdown(child, level) for child in element.children)
     return ''
